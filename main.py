@@ -61,6 +61,4 @@ Commento:
 {data.get('comment','N/D')}
 """
 ``
-    send_message(message)
 
-    return {"status":"ok"}
