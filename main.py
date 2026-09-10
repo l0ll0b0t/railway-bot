@@ -21,7 +21,7 @@ def send_message(text):
 
 @app.get("/")
 def root():
-    return {"status":"running"}
+    return {"status": "running"}
 
 @app.post("/webhook")
 async def webhook(request: Request):
@@ -34,9 +34,9 @@ async def webhook(request: Request):
 
     except Exception as e:
         send_message(f"ERRORE JSON MT5:\n{str(e)}")
-        return {"status":"error"}
+        return {"status": "error"}
 
-message = f"""
+    message = f"""
 📊 {data.get('symbol','XTIUSD')}
 
 Bias:
@@ -60,5 +60,7 @@ Score:
 Commento:
 {data.get('comment','N/D')}
 """
-``
 
+    send_message(message)
+
+    return {"status": "ok"}
