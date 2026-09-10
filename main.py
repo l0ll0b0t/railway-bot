@@ -1,31 +1,16 @@
-from fastapi import FastAPI, Request
-import os
-import requests
-
-app = FastAPI()
-
-TOKEN = os.environ["TELEGRAM_TOKEN"]
-CHAT_ID = os.environ["CHAT_ID"]
-
-def send_message(text):
-    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
-
-    requests.post(
-        url,
-        json={
-            "chat_id": CHAT_ID,
-            "text": text
-        }
-    )
-
-@app.get("/")
-def root():
-    return {"status":"running"}
-
 @app.post("/webhook")
 async def webhook(request: Request):
 
-    data = await request.json()
+    raw_body = await request.body()
+
+    try:
+        body_text = raw_body.decode("utf-8").strip("\x00")
+        import json
+        data = json.loads(body_text)
+
+    except Exception as e:
+        send_message(f"ERRORE JSON MT5:\n{str(e)}")
+        return {"status":"error"}
 
     message = f"""
 📊 {data.get('symbol','XTIUSD')}
