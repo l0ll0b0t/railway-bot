@@ -36,28 +36,31 @@ async def webhook(request: Request):
         send_message(f"ERRORE JSON MT5:\n{str(e)}")
         return {"status":"error"}
 
-    message = f"""
+message = f"""
 📊 {data.get('symbol','XTIUSD')}
+
+Bias:
+{data.get('bias','N/D')}
 
 Trend H1:
 {data.get('trend_h1','N/D')}
 
-Trend M15:
-{data.get('trend_m15','N/D')}
+Trend M5:
+{data.get('trend_m5','N/D')}
 
-Setup:
-{data.get('setup','N/D')}
+Trigger:
+{data.get('trigger','N/D')}
 
 Prezzo:
 {data.get('price','N/D')}
 
-Forza Setup:
+Score:
 {data.get('score','N/D')}/10
 
-Volatilità:
-{data.get('volatility','N/D')}
+Commento:
+{data.get('comment','N/D')}
 """
-
+``
     send_message(message)
 
     return {"status":"ok"}
