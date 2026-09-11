@@ -7,10 +7,10 @@ import logging
 app = FastAPI()
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("telegram-bot")
+logger = logging.getLogger("XTIUSD Advisor")
 
-TOKEN = os.environ.get("TELEGRAM_TOKEN")
-CHAT_ID = os.environ.get("CHAT_ID")
+TOKEN = os.environ.get("8854597295:AAE3xYNsgQJVbCNr-rjnEy60hGwS2YmLkxg")
+CHAT_ID = os.environ.get("525799659")
 
 
 def send_message(text: str) -> bool:
